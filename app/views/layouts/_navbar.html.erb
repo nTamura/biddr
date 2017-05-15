@@ -10,6 +10,7 @@
 
       <% if user_signed_in? %>
         <li class="<%= 'active' if current_page?(user_favorites_path(current_user)) %>"><%= link_to 'Favorites', user_favorites_path(current_user) %></li>
+        <li class="<%= 'active' if current_page?(user_bids_path(current_user)) %>"><%= link_to 'Bidded', user_bids_path(current_user) %></li>
         <li class="<%= 'active' if current_page?(user_path(current_user)) %>"><%= link_to 'Profile', user_path(current_user) %></li>
 
         <li><%= link_to "#{current_user.username}: Log Out", sessions_path, method: :delete, data: {confirm: 'Logout?'} %></li>

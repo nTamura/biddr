@@ -3,6 +3,7 @@ class User < ApplicationRecord
   before_create :generate_api_token
 
   has_many :bids, dependent: :nullify
+  has_many :bidded_auctions, through: :bids, source: :auction
   has_many :auctions, dependent: :nullify
   has_many :favorites, dependent: :destroy
   has_many :favorited_auctions, through: :favorites, source: :auction

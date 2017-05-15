@@ -1,0 +1,13 @@
+<br>
+<div class="row">
+  <div class="col-md-offset-2 col-md-8">
+    <div class="panel panel-default panel-body">
+      <h1>Your Bidded Auctions 💸</h1>
+      <hr>
+      <% @bids.each do |auction| %>
+      <p><%= link_to auction.title, auction_path(auction) %></p>
+      <% end %>
+
+    </div>
+  </div>
+</div>

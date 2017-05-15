@@ -3,7 +3,7 @@ class FavoritesController < ApplicationController
 
   def index
     user = User.find(params[:user_id])
-    @auctions = user.favorite_ids
+    @auctions = user.favorited_auctions
 
     render 'favorites/index'
   end
@@ -31,8 +31,7 @@ class FavoritesController < ApplicationController
   end
 
   def destroy
-    @auction = Auction.find params[:id]
-
+    @auction = Auction.find params[:auction_id]
     favorite = Favorite.find params[:id]
 
     if cannot? :favorite, @auction
@@ -43,11 +42,11 @@ class FavoritesController < ApplicationController
 
     respond_to do |format|
       if favorite.destroy
-          format.html { redirect_to auction_path(@auction) }
-          format.js { render :render_favorite }
+        format.html { redirect_to auction_path(@auction), notice: 'Unliked question' }
+        format.js   { render :render_favorite }
       else
-        format.html { redirect_to auction_path(@auction) }
-        format.js { render :render_favorite }
+        format.html { redirect_to auction_path(@auction), alert: like.errors.full_messages.join(', ') }
+        format.js   { render :render_favorite }
       end
     end
   end

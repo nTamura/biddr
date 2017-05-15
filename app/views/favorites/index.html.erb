@@ -3,9 +3,9 @@
   <div class="col-md-offset-2 col-md-8">
     <div class="panel panel-default panel-body">
       <h1>Your Favorited Auctions ⭐️</h1>
-
+<hr>
         <% @auctions.each do |auction| %>
-          <%=  auction.user.favorite_ids %>
+        <p><%= link_to auction.title, auction_path(auction) %></p>
         <% end %>
 
     </div>

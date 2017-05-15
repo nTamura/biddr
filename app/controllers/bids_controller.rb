@@ -1,5 +1,11 @@
 class BidsController < ApplicationController
   before_action :authenticate_user!, only: [:create, :index]
+
+  def index
+    user = User.find(params[:user_id])
+    @bids = user.bidded_auctions
+  end
+
   def new
   end
 
@@ -19,10 +25,6 @@ class BidsController < ApplicationController
         format.js {render :failure}
       end
     end
-  end
-
-  def index
-    @bids = current_user.bids
   end
 
   private
