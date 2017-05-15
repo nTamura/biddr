@@ -1,0 +1,12 @@
+<div id="favorite">
+  <% if user_signed_in? && can?(:favorite, @auction) %>
+    <div class="pull-right">
+      <% if current_user.favorite_ids.present? %>
+
+        <%= link_to fa_icon("heart"), auction_favorite_path(@auction, @auction.favorite_for(current_user)), class: "favorites", method: :delete, remote: true %>
+      <% else %>
+        <%= link_to fa_icon("star-o"), auction_favorites_path(@auction), class: "favorites", method: :post, remote: true %>
+      <% end %>
+    <% end %>
+  </div>
+</div>

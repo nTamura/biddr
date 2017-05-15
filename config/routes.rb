@@ -8,10 +8,19 @@ Rails.application.routes.draw do
 
   resources :users, only: [:new, :show, :create] do
     resources :bids, only: [:index]
-    resources :favorites, only: [:create, :destroy]
+    resources :favorites, only: [:index, :create, :destroy]
   end
 
   resources :sessions, only: [:new, :create] do
     delete :destroy, on: :collection
   end
+
+  namespace :api do
+    namespace :v1 do
+      resources :auctions, only: [:index, :show]
+    end
+  end
+
+
+
 end

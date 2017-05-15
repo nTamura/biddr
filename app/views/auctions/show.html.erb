@@ -16,6 +16,8 @@
       </div>
 
       <h1><%= @auction.title %></h1>
+      <%#= render 'favorites/favorite' %>
+
       <hr>
       <div class="well-sm">
         <p><strong>Reserve Price: </strong>$<%= @auction.reserve_price %></p>
@@ -25,6 +27,7 @@
     </div>
   </div>
 
+  <% if user_signed_in? %>
   <div class="col-md-6">
     <div class="panel panel-default panel-body">
       <h3>Place a bid</h3>
@@ -32,13 +35,15 @@
     </div>
 
     <div class="panel panel-default panel-body">
+      <h3>Bids history <small>Highest to lowest</small></h3>
+      <hr>
       <div id="bids">
-        <h3>Bids history</h3>
         <!-- order(created_at: :desc) -->
-        <% @auction.bids.each do |b| %>
-          <%= render '/bids/bid', bid: b %>
+        <% @auction.bids.each do |bid| %>
+          <%= render '/bids/bid', bid: bid %>
         <% end %>
       </div>
     </div>
   </div>
+  <% end %>
 </div>

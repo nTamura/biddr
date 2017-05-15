@@ -4,6 +4,7 @@ git_source(:github) do |repo_name|
   repo_name = "#{repo_name}/#{repo_name}" unless repo_name.include?("/")
   "https://github.com/#{repo_name}.git"
 end
+gem 'active_model_serializers', '~> 0.10.0'
 gem 'rack-cors', :require => 'rack/cors'
 gem 'simple_form'
 gem 'bootstrap-datepicker-rails'

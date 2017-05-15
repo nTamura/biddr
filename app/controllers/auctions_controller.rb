@@ -22,6 +22,11 @@ class AuctionsController < ApplicationController
     @auction = Auction.find params[:id]
     @auctions = Auction.last(20)
     @bid = Bid.new
+    respond_to do |format|
+      format.html {render :show}
+      format.json {render json: @auction}
+    end
+
   end
 
   def index
@@ -45,7 +50,7 @@ class AuctionsController < ApplicationController
   end
 
   def destroy
-    auction = Auction.find params[:id]
+    @auction = Auction.find params[:id]
     # auction.destroy
     if can? :destroy, @auction
       @auction.destroy

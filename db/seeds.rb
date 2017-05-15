@@ -28,6 +28,7 @@ puts 'Created Admin!'
   Auction.create( title: Faker::Commerce.product_name,
                   description:  Faker::Hipster.paragraph,
                   reserve_price: rand(200),
+                  end_date: DateTime.now + (rand * 60),
                   user_id: user.id
                   )
 end
@@ -36,7 +37,7 @@ puts "Created auctions!"
 Auction.all.each do |auction|
   rand(5).times do
     user = User.all.sample
-    auction.bids.create(price: rand(100),
+    auction.bids.create(price: rand(100).to_f,
                         user_id: user.id
     )
   end

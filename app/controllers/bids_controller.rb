@@ -10,13 +10,13 @@ class BidsController < ApplicationController
     @bid.user = current_user
     respond_to do |format|
       if @bid.save
-        update_auction
+        # update_auction
         format.html  {redirect_to @auction, notice: "Bid submitted!"}
-        format.js    {render :create_success}
+        format.js    {render :success}
       else
         format.html { flash[:alert] = "Bid not created!"
                       redirect_to @auction }
-        format.js {render :create_failure}
+        format.js {render :failure}
       end
     end
   end
@@ -32,7 +32,7 @@ class BidsController < ApplicationController
   end
 
   def update_auction
-    @auction.offer = @bid.price
+    @auction.highest_bid = @bid.price
     if @bid.price >= @auction.reserve_price
       puts 'met reserve'
     end

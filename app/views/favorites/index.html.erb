@@ -1,0 +1,13 @@
+<br>
+<div class="row">
+  <div class="col-md-offset-2 col-md-8">
+    <div class="panel panel-default panel-body">
+      <h1>Your Favorited Auctions ⭐️</h1>
+
+        <% @auctions.each do |auction| %>
+          <%=  auction.user.favorite_ids %>
+        <% end %>
+
+    </div>
+  </div>
+</div>
