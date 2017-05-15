@@ -1,13 +1,12 @@
 class AuctionsController < ApplicationController
   before_action :find_auction, only: [:show, :edit, :update, :destroy]
-  # before_action :authenticate_user!, except: [:index, :show]
+  before_action :authenticate_user!, except: [:index, :show]
 
   def new
     @auction = Auction.new
   end
 
   def create
-    auction_params = params.require(:auction).permit([:title, :description, :price])
     @auction = Auction.new auction_params
     @auction.user = current_user
 
@@ -37,7 +36,6 @@ class AuctionsController < ApplicationController
 
   def update
     @auction = Auction.find params[:id]
-    auction_params = params.require(:auction).permit([:title, :description, :price, :category_id, ])
 
     if !(can? :edit, @auction)
       redirect_to root_path, alert: 'Access denied'
@@ -62,7 +60,7 @@ class AuctionsController < ApplicationController
   end
 
   def auction_params
-    params.require(:auction).permit([:title, :description, :price])
+    params.require(:auction).permit([:title, :description, :reserve_price, :end_date])
   end
 
 end

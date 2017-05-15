@@ -1,0 +1,4 @@
+<%= simple_form_for [ @auction, @bid ], remote: true do |f| %>
+<%= f.input :price, :class => "form-control"  %>
+<%= f.submit :class => 'btn' %>
+<% end %>

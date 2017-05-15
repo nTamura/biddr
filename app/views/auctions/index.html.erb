@@ -1,0 +1,29 @@
+<br>
+<div class="clearfix">
+  <h1 class='pull-left'>Auction List</h1>
+  <%= link_to 'New Auction', new_auction_path(@auction), :class => "btn btn-lg btn-primary pull-right"  %>
+</div>
+<hr>
+
+<div class="row">
+  <div class="col-md-offset-2 col-md-8">
+
+      <% @auctions.each do |auction| %>
+      <div class="panel panel-default panel-body">
+      <div class="row">
+        <div class="col-xs-1 text-center">
+          <h3><%= auction.bids.count %></h3>
+          <sup>Bids</sup>
+        </div>
+        <div class="col-xs-11">
+          <h3> <%= link_to auction.title, auction_path(auction) %>          <small class='pull-right'> posted by: <%= auction.user.username %></small>
+</h3>
+          <hr>
+          <p><%= auction.description %></p>
+          <br>
+        </div>
+      </div>
+    </div>
+    <% end %>
+  </div>
+</div>

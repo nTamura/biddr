@@ -1,0 +1,27 @@
+<nav class="navbar navbar-default navbar-fixed-top">
+  <div class="container">
+    <!-- <div class="navbar-header "> -->
+      <%= link_to 'Biddr', root_path, class: 'navbar-brand' %>
+    <!-- </div> -->
+
+<!-- navbar rightside -->
+    <!-- <div id="navbar" class="navbar"> -->
+      <ul class="nav navbar-nav navbar-right">
+
+        <li class="<%= 'active' if current_page?(auctions_path) %>"><%= link_to 'Auctions', auctions_path %></li>
+        <li class="<%= 'active' if current_page?('#') %>"><%= link_to 'Favorites', root_path %></li>
+        <li class="<%= 'active' if current_page?(root_path) %>"><%= link_to 'Profile', root_path %></li>
+
+<!-- signed in user -->
+        <% if session[:user_id].present? %>
+          <li><%= link_to 'Favorites', root_path %> </li>
+          <li><%= link_to "#{current_user.username}: Log Out",  sessions_path, method: :delete, data: {confirm: 'Logout?'} %></li>
+        <% else %>
+          <li><%= link_to 'Log In', new_session_path %></li>
+          <li><%= link_to 'Sign Up', new_user_path %></li>
+        <% end %>
+        </ul>
+    <!-- </div> -->
+  </div>
+</nav>
+<!-- user_likes_path(current_user) -->

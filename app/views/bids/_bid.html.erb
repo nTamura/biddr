@@ -1,0 +1,9 @@
+<div id='<%= dom_id(bid) %>'>
+
+<strong><%= bid.user.username %></strong> bid:
+<p><%= bid.price %></p>
+
+<%= link_to 'Delete', auction_bid_path(@auction, bid), method: :delete, data: {confirm: "Are you sure?"}, remote: true %>
+<hr />
+
+</div>

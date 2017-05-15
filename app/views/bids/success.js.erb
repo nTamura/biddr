@@ -1,0 +1,4 @@
+$('#bids').fadeIn(400, function() { $(this).show() }).prepend('<%= j render 'bid', bid: @bid %>');
+$('#bid_body').val('');
+<% @bid = Bid.new %>
+$('#new_bid').replaceWith('<%= j render 'form' %>')

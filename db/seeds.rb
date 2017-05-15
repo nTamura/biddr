@@ -23,25 +23,23 @@ User.create(username: 'Admin',
 puts 'Created Admin!'
 
 
-# 30.times do
-#   user.sample
-#   Auction.create( title: Faker::Commerce.product_name,
-#                   description:  Faker::Hipster.paragraph,
-#                   reserve_price: rand(200),
-#                   # user_id: user.id
-#                   )
-# end
-# puts "Created auctions!"
+30.times do
+  user = User.all.sample
+  Auction.create( title: Faker::Commerce.product_name,
+                  description:  Faker::Hipster.paragraph,
+                  reserve_price: rand(200),
+                  user_id: user.id
+                  )
+end
+puts "Created auctions!"
 
-
-# auctions.each do |a|
-#   rand(1..4).times do
-#     user.sample
-#     a.Bid.create(price: rand(150),
-#                   # user_id: user.id
-#                   )
-#   end
-# end
-# puts "Created bids!"
-
+Auction.all.each do |auction|
+  rand(5).times do
+    user = User.all.sample
+    auction.bids.create(price: rand(100),
+                        user_id: user.id
+    )
+  end
+end
+puts "Bids created!"
 puts '>>> Seed complete <<<'

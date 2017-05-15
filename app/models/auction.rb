@@ -6,9 +6,9 @@ class Auction < ApplicationRecord
 
   before_save :capitalize_title
 
-  validates :title,       { presence: true}
-  validates :description, { presence: true}
-  validates :price,       { presence: true,
+  validates :title,         { presence: true}
+  validates :description,   { presence: true}
+  validates :reserve_price, { presence: true,
                             numericality: { greater_than_or_equal_to: 1 }}
                             # greater than bid.price
 

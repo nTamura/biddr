@@ -1,5 +1,17 @@
 Rails.application.routes.draw do
-  get 'welcome/index'
+  root 'welcome#index'
 
-  # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
+  resources :auctions do
+    resources :bids, only: [:new, :create, :destroy]
+    resources :favorites, only: [:create, :destroy]
+  end
+
+  resources :users, only: [:new, :show, :create] do
+    resources :bids, only: [:index]
+    resources :favorites, only: [:create, :destroy]
+  end
+
+  resources :sessions, only: [:new, :create] do
+    delete :destroy, on: :collection
+  end
 end
