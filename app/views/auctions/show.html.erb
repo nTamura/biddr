@@ -12,6 +12,9 @@
         <p>Posted by: <strong><%= @auction.user.username %></strong></p>
         <p>Created on: <strong><%= standard_date_format(@auction.created_at) %></strong></p>
         <p>Auction Ending: <strong><%= @auction.end_date %></strong></p>
+        <% if @auction.may_publish? %>
+        <%= link_to 'Publish', auction_publishings_path(@auction), method: :post %>
+        <% end %>
 
       </div>
 

@@ -3,7 +3,7 @@ class Auction < ApplicationRecord
   belongs_to :user
   has_many :favorites, dependent: :destroy
   has_many :favoriters, through: :favorites, source: :user
-  
+
   has_many :bids, lambda { order(price: :desc) }, dependent: :destroy
   # has_many :favorites, dependent: :destroy
 
@@ -23,6 +23,37 @@ class Auction < ApplicationRecord
 
   def favorite_for(user)
     favorites.find_by(user: user)
+  end
+
+
+  include AASM
+
+  aasm whiny_transitions: false do
+    state :draft, initial: true
+    state :published
+    state :cancelled
+    state :bidded
+    state :unbidded
+
+    event :publish do
+     transitions from: :draft, to: :published
+    end
+
+    event :bid do
+     transitions from: :published, to: :bidded
+    end
+
+    event :unbidded do
+     transitions from: :published, to: :unbidded
+    end
+
+    event :cancel do
+     transitions from: [:published, :bidded], to: :cancelled
+    end
+
+    event :relaunch do
+     transitions from: :cancelled, to: :draft
+    end
   end
 
   private

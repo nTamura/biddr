@@ -8,6 +8,10 @@ class Ability
       can :manage, :all
     end
 
+    can :manage, Auction do |a|
+      a.user == user
+    end
+
     can :favorite, Auction do |a|
       user != a.user
     end
@@ -16,8 +20,8 @@ class Ability
       user == a.user
     end
 
-    can [:edit, :destroy], Auction do |auction|
-      auction.user == user
+    can [:edit, :destroy], Auction do |a|
+      a.user == user
     end
   end
 end

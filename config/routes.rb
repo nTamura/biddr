@@ -4,6 +4,8 @@ Rails.application.routes.draw do
   resources :auctions do
     resources :bids, only: [:new, :create, :destroy]
     resources :favorites, only: [:create, :destroy]
+    resources :publishings, only: :create
+
   end
 
   resources :users, only: [:new, :show, :create] do
@@ -20,7 +22,5 @@ Rails.application.routes.draw do
       resources :auctions, only: [:index, :show]
     end
   end
-
-
 
 end
